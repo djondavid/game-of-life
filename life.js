@@ -78,13 +78,13 @@ const checkNeighborhood = (yCell, xCell) => {
     if (yCoord < 0) {
       yCoord += grid_y_size;
     }
-    if (yCoord > (grid_y_size -1)) {
+    if (yCoord > grid_y_size - 1) {
       yCoord -= grid_y_size;
     }
     if (xCoord < 0) {
       xCoord += grid_x_size;
     }
-    if (xCoord > (grid_x_size -1)) {
+    if (xCoord > grid_x_size - 1) {
       xCoord -= grid_x_size;
     }
     // console.log("Neighbor cell [" + yCoord + "][" + xCoord + "]");
@@ -107,13 +107,13 @@ const checkNeighborhood = (yCell, xCell) => {
   // if the sum is 3 the next state will be alive
   if (sum === 3) {
     nextState = 1;
-  } 
+  }
   // if the sum is 4 the next state will be the same as the current state
   else if (sum === 4) {
     nextState = grid[yCell][xCell] ? 1 : 0;
   }
   // console.log("Next state is '" + (nextState ? "Alive" : "Dead" ) + "'");
-  
+
   // update the cell in the nextGrid
   nextGrid[yCell][xCell] = nextState;
 };
@@ -157,15 +157,31 @@ const tick = () => {
   nextGrid = null;
 };
 
+const countPop = () => {
+  let count = 0;
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      if (grid[i][j] === 1) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+};
+
 // main loop
 initGrid();
 document.getElementById("name").innerHTML = data?.name;
 document.getElementById("type").innerHTML = data?.type;
 const genDiv = document.getElementById("generation");
+const popDiv = document.getElementById("population");
 for (let i = 0; i < generations; i++) {
   setTimeout(() => {
     tick();
-    genDiv.innerHTML = i+1;
+    genDiv.innerHTML = i + 1;
+    popDiv.innerHTML = countPop();
   }, i * delay);
 }
 showGrid();
