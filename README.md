@@ -74,7 +74,7 @@ We cannot create or maintain an "infinite" grid (memory, processing time, etc.).
 
 ### Future considerations
 
-- UI? Graphics/Vector lib (Canvas?)
-- How do we set the initial configuration? UI, code, JSON, random `grid[x][y] = floor(random(2));`
+- Add poplulation counter to UI
+- Add UI to set initial configuration from JSON data files, random `grid[x][y] = floor(random(2));` or upload custom JSON file.
 - Algorithm for "wrapping" the grid edges together?
 - Memoization or Hashing algorithms
